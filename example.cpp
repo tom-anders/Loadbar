@@ -6,10 +6,12 @@
 using namespace std::chrono_literals;
 
 int main() {
-    const int size = 10;
+    const int size = 100;
     ProgressBar bar(size, std::cerr);
+#pragma omp parallel for
     for (int i = 0; i < size; i++) {
-        bar.print(fmt::format("i={}", i));
-        std::this_thread::sleep_for(0.5s);
+        bar.print();
+
+        std::this_thread::sleep_for(0.3s);
     }
 }

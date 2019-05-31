@@ -8,6 +8,7 @@ class ProgressBar {
         int mid, full;
         const bool half;
         int c;
+        int iter = 0;
         double lastSpin;
         std::ostream &os;
     public:
@@ -43,7 +44,7 @@ class ProgressBar {
         }
 
         std::string print(std::string barSuffix = "", std::string barPrefix = "") {
-            return print(c, barSuffix, barPrefix);
+            return print(iter++, barSuffix, barPrefix);
         }
 
         std::string print(int currentIterations, std::string barSuffix = "", std::string barPrefix = "") {

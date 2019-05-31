@@ -1,4 +1,5 @@
 #include <omp.h> // -fopenmp
+#include <iostream>
 #include <fmt/ostream.h> // -DFMT_HEADER_ONLY
 
 class ProgressBar {
@@ -8,6 +9,7 @@ class ProgressBar {
         const bool half;
         int c;
         double lastSpin;
+        std::ostream &os;
     public:
         const int maximumIterations;
         const int barLength, decimalPoints;
@@ -16,10 +18,11 @@ class ProgressBar {
         const bool isSpinning;
         const double spinPS;
         int maxSize;
-        ProgressBar(int maximumIterations, int barLength = 20, int decimalPoints = 0, 
+        ProgressBar(int maximumIterations, std::ostream &os = std::cout, int barLength = 20, int decimalPoints = 0, 
                 bool isSpinning = true, double spinPS = 0.1, std::string spin = "|/-\\", 
                 char sym0 = ' ', char sym1 = '-', char sym2 = '=', std::string barEnd = "Done") 
             : maximumIterations(maximumIterations), 
+              os(os),
               barLength(barLength), 
               decimalPoints(decimalPoints), 
               isSpinning(isSpinning), 
@@ -57,7 +60,7 @@ class ProgressBar {
              + ( (isSpinning && currentIterations < maximumIterations) ? " [" + spin.substr(c%spin.size(),1)+"] " : " " )
              + ( currentIterations < maximumIterations ? barSuffix : barEnd );
             maxSize = (ret.size()>maxSize) ? ret.size() : maxSize;
-            fmt::print("{:<{}}\r",ret,maxSize);
+            fmt::print(os, "{:<{}}\r",ret,maxSize);
             return ret;
         }
 };

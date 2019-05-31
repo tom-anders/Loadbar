@@ -1,15 +1,5 @@
-#include <cmath>
-//#include <complex>
-#include <time.h>
-#include <stdlib.h>
-#include <stdio.h>
-//#include <stdarg.h>
-#include <string>
-#include <iostream>
 #include <omp.h> // -fopenmp
-#include <fmt/core.h> // -DFMT_HEADER_ONLY
-#include <fmt/format.h>
-#include <fmt/ostream.h>
+#include <fmt/ostream.h> // -DFMT_HEADER_ONLY
 
 class ProgressBar {
     private:

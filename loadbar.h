@@ -15,35 +15,34 @@ class ProgressBar {
     private:
         double currentPercent;
         int mid, full;
-        bool half;
+        const bool half;
         int c;
         double lastSpin;
     public:
-        int maximumIterations;
-        int barLength, decimalPoints;
-        char sym0, sym1, sym2;
-        std::string barEnd, spin;
-        bool isSpinning;
-        double spinPS;
+        const int maximumIterations;
+        const int barLength, decimalPoints;
+        const char sym0, sym1, sym2;
+        const std::string barEnd, spin;
+        const bool isSpinning;
+        const double spinPS;
         int maxSize;
-        ProgressBar(int _maximumIterations, int _barLength = 20, int _decimalPoints = 0, bool _isSpinning = true, double _spinPS = 0.1, std::string _spin = "|/-\\", char _sym0 = ' ', char _sym1 = '-', char _sym2 = '=', std::string _barEnd = "Done") {
-            maximumIterations   = _maximumIterations;
-            barLength           = _barLength;
-            decimalPoints       = _decimalPoints;
-            isSpinning          = _isSpinning;
-            spinPS              = _spinPS;
-            lastSpin            = 0;
-            sym0                = _sym0;
-            sym1                = _sym1;
-            sym2                = _sym2;
-            barEnd              = _barEnd;
-            mid                 = 0;
-            full                = 0;
-            half                = ( _sym1 == _sym2 ? false : true );
-            spin                = _spin;
-            c                   = 0;
-            maxSize = 0;
-        }
+        ProgressBar(int maximumIterations, int barLength = 20, int decimalPoints = 0, 
+                bool isSpinning = true, double spinPS = 0.1, std::string spin = "|/-\\", 
+                char sym0 = ' ', char sym1 = '-', char sym2 = '=', std::string barEnd = "Done") 
+            : maximumIterations(maximumIterations), 
+              barLength(barLength), 
+              decimalPoints(decimalPoints), 
+              isSpinning(isSpinning), 
+              spinPS(spinPS), 
+              lastSpin(0), 
+              sym0(sym0), sym1(sym1), sym2(sym2),
+              barEnd(barEnd), 
+              mid(0), full(0), 
+              half(sym1 != sym2), 
+              spin(spin), 
+              c(0), 
+              maxSize(0) {}
+
         void calculate(int currentIterations) {
             currentPercent  = 1.0*currentIterations/maximumIterations;
             full            = half ? std::ceil(barLength*2.0*std::max(.0,currentPercent-.5)) : 0;

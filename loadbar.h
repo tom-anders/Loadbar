@@ -41,6 +41,11 @@ class ProgressBar {
             full            = half ? std::ceil(barLength*2.0*std::max(.0,currentPercent-.5)) : 0;
             mid             = half ? std::ceil(barLength*2.0*std::min(.5,currentPercent)) : std::ceil(barLength*std::min(1.,currentPercent));
         }
+
+        std::string print(std::string barSuffix = "", std::string barPrefix = "") {
+            return print(c, barSuffix, barPrefix);
+        }
+
         std::string print(int currentIterations, std::string barSuffix = "", std::string barPrefix = "") {
             calculate(currentIterations);
             std::string ret = "";

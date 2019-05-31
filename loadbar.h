@@ -61,6 +61,7 @@ class ProgressBar {
              + ( currentIterations < maximumIterations ? barSuffix : barEnd );
             maxSize = (ret.size()>maxSize) ? ret.size() : maxSize;
             fmt::print(os, "{:<{}}\r",ret,maxSize);
+            os << std::flush; 
             return ret;
         }
 };
